@@ -1,0 +1,25 @@
+sum(values: ptr i32, length: usize): i32 {
+    mut total: i32 = 0;
+    mut i: usize = 0;
+
+    loop if i < length {
+        total += values[i];
+        i += 1;
+    }
+
+    total
+}
+
+increment(value: ptr mut i32): void {
+    deref value += 1;
+}
+
+main(): i32 {
+    mut numbers: [i32*4] = [10, 20, 30, 40];
+
+    increment(&mut numbers[0]);
+
+    result: i32 = sum(numbers, 4);
+
+    result
+}

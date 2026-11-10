@@ -1,0 +1,40 @@
+puts(text: ptr u8): i32 = extern;
+
+Operation: enum i32 {
+    Add = 1,
+    Subtract = 2,
+    Multiply = 3,
+}
+
+Command: struct {
+    operation: Operation;
+    lhs: i32;
+    rhs: i32;
+}
+
+execute(command: Command): i32 {
+    match command.operation {
+        Operation.Add: command.lhs + command.rhs,
+        Operation.Subtract: command.lhs - command.rhs,
+        Operation.Multiply: command.lhs * command.rhs,
+        _: 0,
+    }
+}
+
+main(): i32 {
+    command: Command = {
+        operation: Operation.Multiply,
+        lhs: 6,
+        rhs: 7,
+    };
+
+    result: i32 = execute(command);
+
+    if result == 42 {
+        puts("Success!");
+    } else {
+        puts("Unexpected result");
+    }
+
+    0
+}
